@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+    
+    <title>忍者突袭 - 武士版</title>
+    
+    <style type="text/css">
+        /* 全屏布局 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Helvetica, sans-serif;
+            font-size: 11px;
+            line-height: 15px;
+            color: #c8c0c0;
+            background-color: #1d1d1d;
+            text-align: center;
+        }
+        
+        /* Canvas层级：背景(0) < 游戏对象(1) < 特效(10) */
+        canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        #background { z-index: 0; }
+        #fg_objects { z-index: 1; }
+        #effects { z-index: 10; }
+    </style>
+
+    <!-- 游戏引擎文件 -->
+    <script type="text/javascript" src="./js/engine.min.js"></script>
+    <script type="text/javascript" src="./js/game.min.js"></script>
+    <script type="text/javascript" src="./js/mobile_adapt.js"></script>
+
+    <script type="text/javascript">
+        // IE9兼容
+        if (navigator.userAgent.match(/MSIE/)) {
+            if (!window.console) { var console = {}; }
+            if (!console.log) { console.log = function() {}; }
+            window.addEventListener("load", function() {
+                init();
+                if (window.FullscreenUtils) {
+                    FullscreenUtils.initFullscreen(null, '忍者突袭-武士版');
+                }
+            }, true);
+        } else {
+            // 页面加载完成后初始化游戏
+            window.onload = function() {
+                init();
+                if (window.FullscreenUtils) {
+                    FullscreenUtils.initFullscreen(null, '忍者突袭-武士版');
+                }
+            }
+        }
+    </script>
+</head>
+
+<body id="0">
+    <!-- 三层Canvas：背景、游戏对象、特效 -->
+    <canvas id="background" width="320" height="568"></canvas>
+    <canvas id="fg_objects" width="320" height="568"></canvas>
+    <canvas id="effects" width="320" height="568"></canvas>
+</body>
+</html>
